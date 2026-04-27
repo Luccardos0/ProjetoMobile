@@ -44,35 +44,17 @@ class HomeScreenLogged extends StatelessWidget {
         backgroundColor: _appBarColor,
         elevation: 0,
         centerTitle: false,
+        titleSpacing: 0,
         title: Row(
           children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: _buttonColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  'B',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
             Image.asset(
-              'assets/logo.png',
-              width: 140,
+              'images/logo.png',
+              width: 200,
               height: 48,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
                 return const SizedBox(
-                  width: 140,
+                  width: 200,
                   height: 48,
                   child: Center(
                     child: Text(

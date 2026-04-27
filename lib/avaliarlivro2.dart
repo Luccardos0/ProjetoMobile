@@ -292,11 +292,16 @@ class _BookEvaluationDetailScreenState extends State<BookEvaluationDetailScreen>
         ),
       ),
 
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        backgroundColor: _buttonColor,
-        child: const Icon(Icons.arrow_back, color: Colors.white),
-      ),
+    floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => const ConfirmationDialog(),
+        );
+      },
+      backgroundColor: _buttonColor,
+      child: const Icon(Icons.arrow_back, color: Colors.white),
+    ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
