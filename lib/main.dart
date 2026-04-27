@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'cadastrar.dart';
 import 'mais_livro.dart';
+import 'mais_livro_logado.dart';
+import 'auth_service.dart';
 
 void main() {
   runApp(const BookRateApp());
@@ -156,14 +158,26 @@ class HomeScreen extends StatelessWidget {
               children: _books
                   .map((title) => GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => MaisLivroScreen(
-                                titulo: title,
-                                autor: _getAutor(title),
+                          // Verifica se o usuário está logado
+                          if (AuthService().isLoggedIn) {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MaisLivroScreenLogged(
+                                  titulo: title,
+                                  autor: _getAutor(title),
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          } else {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => MaisLivroScreen(
+                                  titulo: title,
+                                  autor: _getAutor(title),
+                                ),
+                              ),
+                            );
+                          }
                         },
                         child: BookCard(
                           title: title,

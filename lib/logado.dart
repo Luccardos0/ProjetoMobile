@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'avaliarlivro.dart';
 import 'perfil.dart';
 import 'mais_livro.dart';
+import 'mais_livro_logado.dart';
 
 class HomeScreenLogged extends StatelessWidget {
   const HomeScreenLogged({super.key});
@@ -97,7 +98,7 @@ class HomeScreenLogged extends StatelessWidget {
               },
               icon: const Icon(Icons.add, size: 20),
               label: const Text(
-                '+ Avaliar livro',
+                'Avaliar livro',
                 style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
               style: ElevatedButton.styleFrom(
@@ -154,7 +155,7 @@ class HomeScreenLogged extends StatelessWidget {
                         onTap: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => MaisLivroScreen(
+                              builder: (context) => MaisLivroScreenLogged(
                                 titulo: title,
                                 autor: _getAutor(title),
                               ),

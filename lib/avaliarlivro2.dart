@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'aviso.dart';
 
-class BookEvaluationDetailScreen extends StatelessWidget {
+class BookEvaluationDetailScreen extends StatefulWidget {
   final String titulo;
   final String autor;
 
@@ -10,6 +10,20 @@ class BookEvaluationDetailScreen extends StatelessWidget {
     required this.titulo,
     this.autor = 'Autor Desconhecido',
   });
+
+  @override
+  State<BookEvaluationDetailScreen> createState() => _BookEvaluationDetailScreenState();
+}
+
+class _BookEvaluationDetailScreenState extends State<BookEvaluationDetailScreen> {
+  int _notaSelecionada = 0;
+  final TextEditingController _comentarioController = TextEditingController();
+
+  @override
+  void dispose() {
+    _comentarioController.dispose();
+    super.dispose();
+  }
 
   static const _backgroundColor = Color(0xFF050B1F);
   static const _cardColor = Color(0xFFF7D19C);
@@ -150,7 +164,7 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    titulo,
+                                    widget.titulo,
                                     style: const TextStyle(
                                       color: _labelColor,
                                       fontWeight: FontWeight.bold,
@@ -161,7 +175,7 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                                   const SizedBox(height: 10),
 
                                   Text(
-                                    autor,
+                                    widget.autor,
                                     style: const TextStyle(
                                       color: _labelColor,
                                       fontSize: 16,
@@ -196,19 +210,26 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           color: _creamColor,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: const Row(
+                        child: Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(Icons.star, color: Colors.red, size: 22),
-                            SizedBox(width: 6),
-                            Icon(Icons.star, color: Colors.red, size: 22),
-                            SizedBox(width: 6),
-                            Icon(Icons.star, color: Colors.red, size: 22),
-                            SizedBox(width: 6),
-                            Icon(Icons.star, color: Colors.grey, size: 22),
-                            SizedBox(width: 6),
-                            Icon(Icons.star, color: Colors.grey, size: 22),
-                          ],
+                          children: List.generate(5, (index) {
+                            final bool isFilled = index < _notaSelecionada;
+                            return GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _notaSelecionada = index + 1;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 3),
+                                child: Icon(
+                                  isFilled ? Icons.star : Icons.star_border,
+                                  color: isFilled ? Colors.red : Colors.grey,
+                                  size: 28,
+                                ),
+                              ),
+                            );
+                          }),
                         ),
                       ),
 
@@ -271,30 +292,10 @@ class BookEvaluationDetailScreen extends StatelessWidget {
         ),
       ),
 
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: 'dialogButton',
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const ConfirmationDialog(),
-              );
-            },
-            backgroundColor: _buttonColor,
-            child: const Icon(Icons.reply, color: Colors.white),
-          ),
-
-          const SizedBox(height: 12),
-
-          FloatingActionButton(
-            heroTag: 'backButton',
-            onPressed: () => Navigator.of(context).pop(),
-            backgroundColor: _buttonColor,
-            child: const Icon(Icons.arrow_back, color: Colors.white),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pop(),
+        backgroundColor: _buttonColor,
+        child: const Icon(Icons.arrow_back, color: Colors.white),
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
