@@ -23,16 +23,7 @@ class BookEvaluationDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _backgroundColor,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) => const ConfirmationDialog(),
-          );
-        },
-        backgroundColor: _buttonColor,
-        child: const Icon(Icons.reply, color: Colors.white),
-      ),
+
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
@@ -63,13 +54,20 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 24,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 14,
+                        ),
                         decoration: BoxDecoration(
                           color: _statusColor,
                           borderRadius: BorderRadius.circular(20),
@@ -84,7 +82,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       const Text(
                         'ISBN:',
                         style: TextStyle(
@@ -93,9 +93,14 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
+
                       const SizedBox(height: 8),
+
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
                         decoration: BoxDecoration(
                           color: _creamColor,
                           borderRadius: BorderRadius.circular(30),
@@ -108,7 +113,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       Container(
                         decoration: BoxDecoration(
                           color: _creamDarkColor,
@@ -135,7 +142,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+
                             const SizedBox(width: 16),
+
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +157,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                                       fontSize: 18,
                                     ),
                                   ),
+
                                   const SizedBox(height: 10),
+
                                   Text(
                                     autor,
                                     style: const TextStyle(
@@ -162,7 +173,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       const Text(
                         'Avaliação:',
                         style: TextStyle(
@@ -171,16 +184,21 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
+
                       const SizedBox(height: 8),
+
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           color: _creamColor,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
+                          children: [
                             Icon(Icons.star, color: Colors.red, size: 22),
                             SizedBox(width: 6),
                             Icon(Icons.star, color: Colors.red, size: 22),
@@ -193,7 +211,9 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           ],
                         ),
                       ),
+
                       const SizedBox(height: 20),
+
                       const Text(
                         'Comentário:',
                         style: TextStyle(
@@ -202,29 +222,28 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
+
                       const SizedBox(height: 8),
+
                       TextField(
                         maxLines: 5,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: _creamColor,
                           hintText: 'Escreva sua avaliação aqui...',
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: BorderSide.none,
                           ),
                         ),
                       ),
+
                       const SizedBox(height: 24),
+
                       ElevatedButton(
                         onPressed: () {},
                         style: ElevatedButton.styleFrom(
@@ -251,11 +270,33 @@ class BookEvaluationDetailScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pop(),
-        backgroundColor: _buttonColor,
-        child: const Icon(Icons.arrow_back, color: Colors.white),
+
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: 'dialogButton',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const ConfirmationDialog(),
+              );
+            },
+            backgroundColor: _buttonColor,
+            child: const Icon(Icons.reply, color: Colors.white),
+          ),
+
+          const SizedBox(height: 12),
+
+          FloatingActionButton(
+            heroTag: 'backButton',
+            onPressed: () => Navigator.of(context).pop(),
+            backgroundColor: _buttonColor,
+            child: const Icon(Icons.arrow_back, color: Colors.white),
+          ),
+        ],
       ),
+
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
