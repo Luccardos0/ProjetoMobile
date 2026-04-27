@@ -40,8 +40,8 @@ class RegisterScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Center(
                     child: Image.asset(
-                      'assets/logo.png',
-                      height: 48,
+                      'images/logo.png',
+                      height: 60,
                       fit: BoxFit.contain,
                     ),
                   ),

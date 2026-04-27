@@ -43,29 +43,20 @@ class HomeScreenLogged extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: _appBarColor,
         elevation: 0,
-        centerTitle: false,
-        titleSpacing: 0,
-        title: Row(
-          children: [
-            Image.asset(
-              'images/logo.png',
-              width: 200,
-              height: 48,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return const SizedBox(
-                  width: 200,
-                  height: 48,
-                  child: Center(
-                    child: Text(
-                      'Logo não encontrada',
-                      style: TextStyle(color: Colors.black87, fontSize: 10),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
+        automaticallyImplyLeading: false,
+        leadingWidth: 200,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Image.asset(
+            'images/logo.png',
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return const Text(
+                'Logo não encontrada',
+                style: TextStyle(color: Colors.black87, fontSize: 10),
+              );
+            },
+          ),
         ),
         actions: [
           Padding(

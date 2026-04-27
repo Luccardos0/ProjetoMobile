@@ -62,8 +62,8 @@ class _BookEvaluationDetailScreenState extends State<BookEvaluationDetailScreen>
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Center(
                     child: Image.asset(
-                      'assets/logo.png',
-                      height: 50,
+                      'images/logo.png',
+                      height: 70,
                       fit: BoxFit.contain,
                     ),
                   ),

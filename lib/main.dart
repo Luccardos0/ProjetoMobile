@@ -66,24 +66,6 @@ class HomeScreen extends StatelessWidget {
         centerTitle: false,
         title: Row(
           children: [
-            Container(
-              width: 42,
-              height: 42,
-              decoration: BoxDecoration(
-                color: _buttonColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  'B',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
-            ),
             const SizedBox(width: 12),
             // Substitua o texto abaixo pela imagem da logo criada.
             // A imagem está registrada em assets/logo.png.
