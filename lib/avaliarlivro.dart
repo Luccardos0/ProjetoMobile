@@ -104,7 +104,10 @@ class RatingSearchScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const BookEvaluationDetailScreen(),
+                                  builder: (context) => const BookEvaluationDetailScreen(
+                                    titulo: 'Livro não encontrado',
+                                    autor: 'Autor Desconhecido',
+                                  ),
                                 ),
                               );
                             },

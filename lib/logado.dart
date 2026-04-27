@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'avaliarlivro.dart';
 import 'perfil.dart';
+import 'mais_livro.dart';
 
 class HomeScreenLogged extends StatelessWidget {
   const HomeScreenLogged({super.key});
@@ -19,6 +20,20 @@ class HomeScreenLogged extends StatelessWidget {
     'Mentirosos',
     'Até o Verão Terminar',
   ];
+
+  // Mapeamento de livros para autores
+  static const _bookAuthors = {
+    'Harry Potter': 'J.K. Rowling',
+    'A Vida Invisível de Addie LaRue': 'V.E. Schwab',
+    'Diário de um Banana': 'Jeff Kinney',
+    'Amor(es) Verdadeiro(s)': 'Colleen Hoover',
+    'Mentirosos': 'E. Lockhart',
+    'Até o Verão Terminar': 'Jenny Han',
+  };
+
+  String _getAutor(String titulo) {
+    return _bookAuthors[titulo] ?? 'Autor Desconhecido';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,10 +150,22 @@ class HomeScreenLogged extends StatelessWidget {
               mainAxisSpacing: 12,
               childAspectRatio: 0.40,
               children: _books
-                  .map((title) => BookCard(
-                        title: title,
-                        cardColor: _cardColor,
-                        starColor: _starColor,
+                  .map((title) => GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => MaisLivroScreen(
+                                titulo: title,
+                                autor: _getAutor(title),
+                              ),
+                            ),
+                          );
+                        },
+                        child: BookCard(
+                          title: title,
+                          cardColor: _cardColor,
+                          starColor: _starColor,
+                        ),
                       ))
                   .toList(),
             ),

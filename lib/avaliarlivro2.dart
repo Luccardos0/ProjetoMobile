@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 import 'aviso.dart';
 
 class BookEvaluationDetailScreen extends StatelessWidget {
-  const BookEvaluationDetailScreen({super.key});
+  final String titulo;
+  final String autor;
+
+  const BookEvaluationDetailScreen({
+    super.key,
+    required this.titulo,
+    this.autor = 'Autor Desconhecido',
+  });
 
   static const _backgroundColor = Color(0xFF050B1F);
   static const _cardColor = Color(0xFFF7D19C);
@@ -132,19 +139,19 @@ class BookEvaluationDetailScreen extends StatelessWidget {
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
+                                children: [
                                   Text(
-                                    'A Hora da Estrela',
-                                    style: TextStyle(
+                                    titulo,
+                                    style: const TextStyle(
                                       color: _labelColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                     ),
                                   ),
-                                  SizedBox(height: 10),
+                                  const SizedBox(height: 10),
                                   Text(
-                                    'Clarice Lispector',
-                                    style: TextStyle(
+                                    autor,
+                                    style: const TextStyle(
                                       color: _labelColor,
                                       fontSize: 16,
                                     ),
@@ -244,6 +251,12 @@ class BookEvaluationDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pop(),
+        backgroundColor: _buttonColor,
+        child: const Icon(Icons.arrow_back, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }

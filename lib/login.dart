@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'cadastrar.dart';
 import 'logado.dart';
+import 'auth_service.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -66,6 +67,8 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(height: 24),
                       ElevatedButton(
                         onPressed: () {
+                          // Realiza login através do AuthService
+                          AuthService().login('usuario_logado');
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => const HomeScreenLogged(),
@@ -125,6 +128,12 @@ class LoginScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).pop(),
+        backgroundColor: _buttonColor,
+        child: const Icon(Icons.arrow_back, color: Colors.white),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 

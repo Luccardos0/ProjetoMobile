@@ -4,8 +4,15 @@ import 'avaliarlivro.dart';
 import 'avaliarlivro2.dart';
 import 'logado.dart';
 
-class RatingSearchNameScreen extends StatelessWidget {
+class RatingSearchNameScreen extends StatefulWidget {
   const RatingSearchNameScreen({super.key});
+
+  @override
+  State<RatingSearchNameScreen> createState() => _RatingSearchNameScreenState();
+}
+
+class _RatingSearchNameScreenState extends State<RatingSearchNameScreen> {
+  final TextEditingController _bookNameController = TextEditingController();
 
   static const _backgroundColor = Color(0xFF050B1F);
   static const _cardColor = Color(0xFFF7D19C);
@@ -13,6 +20,12 @@ class RatingSearchNameScreen extends StatelessWidget {
   static const _buttonColor = Color(0xFFFF8A00);
   static const _labelColor = Color(0xFF0B1F3A);
   static const _actionColor = Color(0xFFB00020);
+
+  @override
+  void dispose() {
+    _bookNameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +87,7 @@ class RatingSearchNameScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       TextField(
+                        controller: _bookNameController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: _creamColor,
@@ -102,9 +116,22 @@ class RatingSearchNameScreen extends StatelessWidget {
                           ),
                           child: IconButton(
                             onPressed: () {
+                              final String bookName = _bookNameController.text.trim();
+                              if (bookName.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Por favor, insira o nome do livro'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                                return;
+                              }
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const BookEvaluationDetailScreen(),
+                                  builder: (context) => BookEvaluationDetailScreen(
+                                    titulo: bookName,
+                                    autor: 'Autor Desconhecido',
+                                  ),
                                 ),
                               );
                             },
